@@ -1,8 +1,8 @@
 
+/*-----------------------------------------------------------------*/
+/* Poroduct styles */
 
-#product-details-section {
-    padding: 20px 0;
-}
+
 
 .dsc-product-details-top {
     padding: 10px;
@@ -34,22 +34,13 @@
     margin: 10px 0;
 }
 
+
+/*-----------------------------------------------------------------*/
+/* CategoryBox styles */
+
 .dsc-category-container {
     display: flex;
     flex-wrap: wrap;
 }
 
-.dsc-category {
-    padding: 0 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    background-color: var(--dsc-color-bg-tertiary);
-    border-radius: 4px;
-    height: 30px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--dsc-color-font-tertiary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
