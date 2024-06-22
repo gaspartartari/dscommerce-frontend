@@ -1,9 +1,16 @@
 import './styles.css';
 
-export default function ButtonSecondary() {
+
+
+type Props = {
+    name: string
+}
+
+
+export default function ButtonSecondary({name}: Props) {
     return (
         <div className="dsc-btn dsc-btn-white">
-        Início
+        {name}
     </div>
     );
 }
