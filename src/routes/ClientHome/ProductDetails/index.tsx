@@ -2,37 +2,28 @@ import './styles.css';
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ButtonSecondary from "../../../components/ButtonSecondary";
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
-import { ProductDTO } from "../../../models/product";
+import { useParams } from 'react-router-dom';
+import * as productService from '../../../services/product-service.ts';
+import { Link } from 'react-router-dom';
 
 
-const product: ProductDTO = {
-    id: 1,
-    name: "Smart TV",
-    description: "Bela de uma tv",
-    price: 200,
-    imgUrl: "https://ludovikas.com.br/cdn/shop/files/capa-lk70-azul.jpg?v=1686588982",
-    categories: [
-        {
-            id: 2,
-            name: "Eletrônicos"
-        },
-        {
-            id: 3,
-            name: "Computadores"
-        }
-    ]
-}
 
 export default function ProductDetails() {
+
+    const params = useParams();
+    const product = productService.findById(Number(params.productId));
 
     return (
 
         <main>
             <section id="product-details-section" className="dsc-container">
-                <ProductDetailsCard product={product} />
+                {product &&
+                    <ProductDetailsCard product={product} />}
                 <div className="dsc-btn-page-container">
                     <ButtonPrimary name='Comprar' />
-                    <ButtonSecondary name='Início' />
+                    <Link to={'/catalog'}>
+                        <ButtonSecondary name='Início' />
+                    </Link>
 
                 </div>
             </section>
