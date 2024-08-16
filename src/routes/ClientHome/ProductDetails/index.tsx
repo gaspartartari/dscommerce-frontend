@@ -7,6 +7,7 @@ import * as productService from '../../../services/product-service.ts';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../models/product.ts';
+import * as CartService from '../../../services/cart-service.ts'
 
 
 
@@ -16,6 +17,14 @@ export default function ProductDetails() {
     const params = useParams();
 
     const [product, setProduct] = useState<ProductDTO>();
+
+    function handleBuyButtonClick() {
+        if(product){
+            CartService.addProduct(product);
+            navigate("/cart");
+        }
+            
+    }
 
     useEffect(() => {
         productService.findById(Number(params.productId))
@@ -34,7 +43,9 @@ export default function ProductDetails() {
                 {product &&
                     <ProductDetailsCard product={product} />}
                 <div className="dsc-btn-page-container">
-                    <ButtonPrimary name='Comprar' />
+                    <div onClick={handleBuyButtonClick}>
+                        <ButtonPrimary name='Comprar' />
+                    </div>
                     <Link to={'/catalog'}>
                         <ButtonSecondary name='Início' />
                     </Link>
