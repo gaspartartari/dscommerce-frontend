@@ -39,7 +39,5 @@ export function decreaseItem(productId: number) {
             cart.items = cart.items.filter(x => x.productId != productId);
         }
         cartRepository.save(cart);
-
-
     }
 }

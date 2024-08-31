@@ -10,23 +10,29 @@ import { useEffect, useState } from 'react';
 
 
 
-
 export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [productName, setProductName] = useState<string>("");
+
+
 
   useEffect(() => {
-    productService.findAll()
+    productService.findAll(0, productName)
       .then(response => {
         setProducts(response.data.content);
       })
-  }, [])
+  }, [productName])
+
+  function handleOnSearch(productName: string) {
+    setProductName(productName);
+  }
 
   return (
 
     <main>
       <section id="catalog-section" className="dsc-container">
-        <SearchBar />
+        <SearchBar onSearch={handleOnSearch} />
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
 
           {
