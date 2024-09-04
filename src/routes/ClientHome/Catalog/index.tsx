@@ -7,25 +7,31 @@ import { ProductDTO } from '../../../models/product.ts';
 import { useEffect, useState } from 'react';
 
 
-
+type QueryParams = {
+  page: number,
+  name: string
+}
 
 
 export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
-  const [productName, setProductName] = useState<string>("");
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page : 0,
+    name : ""
+  });
 
 
 
   useEffect(() => {
-    productService.findAll(0, productName)
+    productService.findAll(queryParams.page, queryParams.name)
       .then(response => {
         setProducts(response.data.content);
       })
-  }, [productName])
+  }, [queryParams])
 
-  function handleOnSearch(productName: string) {
-    setProductName(productName);
+  function handleOnSearch(searchText: string) {
+    setQueryParams({ ...queryParams, name : searchText});
   }
 
   return (
