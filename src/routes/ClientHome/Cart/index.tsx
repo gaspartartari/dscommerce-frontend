@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './styles.css';
 import * as cartService from '../../../services/cart-service.ts';
 import { OrderDTO } from '../../../models/order';
 import { useNavigate } from 'react-router-dom';
+import { ContextCartCount } from '../../../utils/context-cart.ts';
 
 
 
@@ -12,6 +13,9 @@ export default function Cart() {
     const [cart, setCart] = useState<OrderDTO>(cartService.get());
 
     const navigate = useNavigate();
+
+    const { setContextCartCount } = useContext(ContextCartCount);
+
 
     function handleKeepShopping() {
         navigate("/catalog");
@@ -25,6 +29,9 @@ export default function Cart() {
     function handleDecreaseItem(productId: number) {
         cartService.decreaseItem(productId);
         setCart(cartService.get());
+        const newCart = cartService.get();
+        setContextCartCount(newCart.items.length);
+        
     }
 
     return (
